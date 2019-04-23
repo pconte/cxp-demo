@@ -29,40 +29,40 @@ function ResultsViewModel() {
     self.tags = ko.observableArray([
         {
             id: 1,
-            name: '',
-            initSelected: true,
-            selected: true
+            name: 'aaa',
+            isInitSelected: true,
+            isSelected: true
         },
         {
             id: 2,
-            name: '',
-            initSelected: false,
-            selected: false
+            name: 'bbb',
+            isInitSelected: false,
+            isSelected: false
         },
         {
             id: 3,
-            name: '',
-            initSelected: true,
-            selected: true
+            name: 'ccc',
+            isInitSelected: true,
+            isSelected: true
         },
         {
             id: 4,
-            name: '',
-            initSelected: false,
-            selected: false
+            name: 'ddd',
+            isInitSelected: false,
+            isSelected: false
         },
         {
             id: 5,
-            name: '',
-            initSelected: true,
-            selected: true
+            name: 'eee',
+            isInitSelected: true,
+            isSelected: true
         }
     ]);
 
     // computed
 
     self.selectedTagIds = ko.computed(function () {
-        return self.tags.filter(function (tag) {
+        return self.tags().filter(function (tag) {
             return tag.selected;
         }).map(function (tag) {
             return tag.id
@@ -74,7 +74,9 @@ function ResultsViewModel() {
             result.tags.some(function (tag) {
                 return self.selectedTagIds.includes(tag.id);
             });
-        }).sort();
+        }).sort(function (a, b) {
+
+        });
     });
 
     // operations

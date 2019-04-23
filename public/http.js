@@ -1,15 +1,3 @@
-function httpGet() {
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.open('GET', '/api/searches');
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            displaySearches(JSON.parse(this.responseText));
-        }
-    };
-    xmlhttp.send();
-}
-
 function httpPost(event) {
     var xmlhttp = new XMLHttpRequest();
     var formData = new FormData(document.getElementById('searchForm'));

@@ -2,7 +2,7 @@
     <head>
         <title>Knowledge Base UI</title>
     </head>
-    <body onLoad="httpGet()">
+    <body onLoad="">
 
         <div id="searchesList"></div>
 
@@ -13,12 +13,14 @@
 
         <div id="tags" data-bind="foreach: tags">
             <div class="tag">
-                aaa
+                <span data-bind="text: name"></span>
                 <input type="checkbox"
-                    data-id="1"
-                    data-name="aaa"
-                    data-init-selected="true"
-                    selected
+                    data-bind="checked: isSelected,
+                        attr: {
+                            'data-id': id,
+                            'data-name': name,
+                            'data-is-init-selected': isInitSelected
+                        }"
                 />
             </div>
         </div>
