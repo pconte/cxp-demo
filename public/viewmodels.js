@@ -5,22 +5,34 @@ function ResultsViewModel() {
 
     self.initResults = [
         {
-            title: 'aaa',
-            url: '',
-            summary: '',
-            tags: []
+            title: 'article number one',
+            id: 1,
+            dateSubmitted: '',
+            url: 'website/articles/1',
+            summary: 'summary text goes here',
+            tagIds: [
+                1, 3, 5
+            ]
         },
         {
-            title: 'bbb',
-            url: '',
-            summary: '',
-            tags: []
+            title: 'article number two',
+            id: 2,
+            dateSubmitted: '',
+            url: 'website/articles/2',
+            summary: 'summary text goes here',
+            tagIds: [
+                1, 4
+            ]
         },
         {
-            title: 'ccc',
-            url: '',
-            summary: '',
-            tags: []
+            title: 'another article',
+            id: 3,
+            dateSubmitted: '',
+            url: 'website/articles/3',
+            summary: 'summary text goes here',
+            tagIds: [
+                2, 4
+            ]
         }
     ];
 
@@ -63,7 +75,7 @@ function ResultsViewModel() {
 
     self.selectedTagIds = ko.computed(function () {
         return self.tags().filter(function (tag) {
-            return tag.selected;
+            return tag.isSelected;
         }).map(function (tag) {
             return tag.id
         });
@@ -71,8 +83,8 @@ function ResultsViewModel() {
 
     self.currResults = ko.computed(function () {
         return self.initResults.filter(function (result) {
-            result.tags.some(function (tag) {
-                return self.selectedTagIds.includes(tag.id);
+            return result.tagIds.some(function (tagId) {
+                return self.selectedTagIds().includes(tagId);
             });
         }).sort(function (a, b) {
 

@@ -27,9 +27,9 @@
 
         <div id="results" data-bind="foreach: currResults">
             <div class="result">
-                <span class="title"></span>
-                <span class="url"></span>
-                <span class="summary"></span>
+                <span class="title" data-bind="text: title"></span>
+                <span class="url" data-bind="text: url"></span>
+                <span class="summary" data-bind="text: summary"></span>
             </div>
         </div>
 
