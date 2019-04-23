@@ -3,29 +3,6 @@ function ResultsViewModel() {
 
     // non-editable
 
-    self.tags = {
-        1: {
-            name: '',
-            initSelected: true
-        },
-        2: {
-            name: '',
-            initSelected: false
-        },
-        3: {
-            name: '',
-            initSelected: true
-        },
-        4: {
-            name: '',
-            initSelected: false
-        },
-        5: {
-            name: '',
-            initSelected: true
-        }
-    };
-
     self.initResults = [
         {
             title: 'aaa',
@@ -49,20 +26,53 @@ function ResultsViewModel() {
 
     // editable
 
-    self.tagsOrdered = ko.observableArray([
-        1, 2, 3, 4, 5
-    ]);
-
-    self.tagsSelected = ko.observableArray([
-        1, 3, 5
+    self.tags = ko.observableArray([
+        {
+            id: 1,
+            name: '',
+            initSelected: true,
+            selected: true
+        },
+        {
+            id: 2,
+            name: '',
+            initSelected: false,
+            selected: false
+        },
+        {
+            id: 3,
+            name: '',
+            initSelected: true,
+            selected: true
+        },
+        {
+            id: 4,
+            name: '',
+            initSelected: false,
+            selected: false
+        },
+        {
+            id: 5,
+            name: '',
+            initSelected: true,
+            selected: true
+        }
     ]);
 
     // computed
 
+    self.selectedTagIds = ko.computed(function () {
+        return self.tags.filter(function (tag) {
+            return tag.selected;
+        }).map(function (tag) {
+            return tag.id
+        });
+    });
+
     self.currResults = ko.computed(function () {
         return self.initResults.filter(function (result) {
             result.tags.some(function (tag) {
-                return self.tagsSelected.includes(tag);
+                return self.selectedTagIds.includes(tag.id);
             });
         }).sort();
     });
