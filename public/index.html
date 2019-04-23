@@ -3,11 +3,34 @@
         <title>Knowledge Base UI</title>
     </head>
     <body onLoad="httpGet()">
+
         <div id="searchesList"></div>
+
         <form name="searchForm" id="searchForm" method="post" onSubmit="httpPost(event);">
             <input name="searchString" type="text" />
             <button type="submit">Submit</button>
         </form>
+
+        <div id="tags" data-bind="foreach: tags">
+            <div class="tag">
+                aaa
+                <input type="checkbox"
+                    data-id="1"
+                    data-name="aaa"
+                    data-init-selected="true"
+                    selected
+                />
+            </div>
+        </div>
+
+        <div id="results" data-bind="foreach: currResults">
+            <div class="result">
+                <span class="title"></span>
+                <span class="url"></span>
+                <span class="summary"></span>
+            </div>
+        </div>
+
         <script>
             function httpGet() {
                 var xmlhttp = new XMLHttpRequest();
