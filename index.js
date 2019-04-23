@@ -30,6 +30,15 @@ app.get("/api/tags", (req, res, next) => {
   });
 });
 
+app.get("/api/suggestions", (req, res, next) => {
+  // console.log(req.query);
+  // TODO: use the incomplete search string to intelligently derive suggestions
+  // from the previously memoized search strings.
+  res.json({
+    'suggestions': searches
+  });
+});
+
 app.post("/api/search", (req, res, next) => {
   var searchString = req.body.searchString;
   

@@ -27,6 +27,10 @@ function ResultsViewModel() {
 
     // data
 
+    self.searchString = ko.observable();
+
+    self.suggestions = ko.observableArray([]);
+
     self.serverResults = ko.observableArray([]);
 
     self.tags = ko.observableArray([]);
@@ -70,9 +74,19 @@ function ResultsViewModel() {
         event.preventDefault();
 
         self.postSearch(body, function (response) {
-            document.getElementById('searchesList').innerHTML = response.searches;
             self.serverResults(response.results);
         });
+    }
+
+    self.suggestSearchString = function () {
+        if (self.searchString() && self.searchString() !== '') {
+            self.getSearchSuggestions(self.searchString(), function (response) {
+                self.suggestions(response.suggestions);
+            });
+        }
+        else {
+            self.suggestions([]);
+        }
     }
 
 
@@ -83,6 +97,18 @@ function ResultsViewModel() {
     
         xmlhttp.open('GET', '/api/tags', true);
         xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(JSON.parse(this.responseText));
+            }
+        };
+        xmlhttp.send();
+    }
+
+    self.getSearchSuggestions = function (searchString, callback) {
+        var xmlhttp = new XMLHttpRequest();
+    
+        xmlhttp.open('GET', '/api/suggestions?search='+searchString, true);
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 callback(JSON.parse(this.responseText));
