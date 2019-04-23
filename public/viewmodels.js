@@ -43,31 +43,31 @@ function ResultsViewModel() {
             id: 1,
             name: 'aaa',
             isInitSelected: true,
-            isSelected: true
+            isSelected: ko.observable(true)
         },
         {
             id: 2,
             name: 'bbb',
             isInitSelected: false,
-            isSelected: false
+            isSelected: ko.observable(false)
         },
         {
             id: 3,
             name: 'ccc',
             isInitSelected: true,
-            isSelected: true
+            isSelected: ko.observable(true)
         },
         {
             id: 4,
             name: 'ddd',
             isInitSelected: false,
-            isSelected: false
+            isSelected: ko.observable(false)
         },
         {
             id: 5,
             name: 'eee',
             isInitSelected: true,
-            isSelected: true
+            isSelected: ko.observable(true)
         }
     ]);
 
@@ -75,7 +75,7 @@ function ResultsViewModel() {
 
     self.selectedTagIds = ko.computed(function () {
         return self.tags().filter(function (tag) {
-            return tag.isSelected;
+            return tag.isSelected();
         }).map(function (tag) {
             return tag.id
         });
