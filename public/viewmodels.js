@@ -47,13 +47,18 @@ function ResultsViewModel() {
     });
 
     self.currResults = ko.computed(function () {
-        return ko.utils.arrayFilter(self.serverResults(), function (result) {
-            return result.tagIds.some(function (tagId) {
-                return self.selectedTagIds().includes(tagId);
-            });
-        }).sort(function (a, b) {
+        if (self.selectedTagIds() && self.selectedTagIds().length > 0) {
+            return ko.utils.arrayFilter(self.serverResults(), function (result) {
+                return result.tagIds.some(function (tagId) {
+                    return self.selectedTagIds().includes(tagId);
+                });
+            }).sort(function (a, b) {
 
-        });
+            });
+        }
+        else {
+            return self.serverResults();
+        }
     });
 
 
@@ -67,15 +72,18 @@ function ResultsViewModel() {
 
     self.submitSearch = function () {
         var formData = new FormData(document.getElementById('searchForm'));
+        var searchString = formData.get('searchString');
         var body = JSON.stringify({
-            'searchString': formData.get('searchString')
+            'searchString': searchString
         });
 
         event.preventDefault();
 
-        self.postSearch(body, function (response) {
-            self.serverResults(response.results);
-        });
+        if (searchString && searchString !== '') {
+            self.postSearch(body, function (response) {
+                self.serverResults(response.results);
+            });
+        }
     }
 
     self.suggestSearchString = function () {
