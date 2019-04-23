@@ -2,7 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var db = require("./db.js");
-var articles = require("./articles.js");
+var articles = require("./models/articles.js");
+var tags = require("./models/tags.js");
 
 var app = express();
 
@@ -21,6 +22,12 @@ app.listen(3000, () => {
 
 app.get("/", (req, res, next) => {
   res.render("index");
+});
+
+app.get("/api/tags", (req, res, next) => {
+  res.json({
+    'tags': tags
+  });
 });
 
 app.post("/api/search", (req, res, next) => {
