@@ -1,9 +1,9 @@
 function ResultsViewModel() {
     var self = this;
 
-    // non-editable
+    // editable
 
-    self.initResults = [
+    self.serverResults = ko.observableArray([
         {
             title: 'article number one',
             id: 1,
@@ -34,9 +34,7 @@ function ResultsViewModel() {
                 2, 4
             ]
         }
-    ];
-
-    // editable
+    ]);
 
     self.tags = ko.observableArray([
         {
@@ -82,7 +80,7 @@ function ResultsViewModel() {
     });
 
     self.currResults = ko.computed(function () {
-        return self.initResults.filter(function (result) {
+        return ko.utils.arrayFilter(self.serverResults(), function (result) {
             return result.tagIds.some(function (tagId) {
                 return self.selectedTagIds().includes(tagId);
             });
@@ -90,6 +88,23 @@ function ResultsViewModel() {
 
         });
     });
+
+    // handlers
+
+    self.submitSearch = function () {
+        var formData = new FormData(document.getElementById('searchForm'));
+        var body = JSON.stringify({
+            'searchString': formData.get('searchString')
+        });
+
+        event.preventDefault();
+
+        self.postSearch(body, function (response) {
+            console.log(response);
+            document.getElementById('searchesList').innerHTML = response.searches;
+            self.serverResults(response.results);
+        });
+    }
 
     // operations
 
@@ -100,6 +115,19 @@ function ResultsViewModel() {
     self.deselectTag = function (tagId) {
         self.selectedTags.remove(tagId);
     };
+
+    self.postSearch = function (body, callback) {
+        var xmlhttp = new XMLHttpRequest();
+    
+        xmlhttp.open('POST', '/api/search', true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(JSON.parse(this.responseText));
+            }
+        };
+        xmlhttp.send(body);
+    }
 }
 
 ko.applyBindings(new ResultsViewModel());

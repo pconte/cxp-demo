@@ -1,0 +1,35 @@
+html
+    head
+        link(rel="stylesheet" href="styles.css")
+        title Knowledge Base UI
+    body
+
+        div(id="searchesList")
+
+        form(name="searchForm" id="searchForm" data-bind="submit: submitSearch")
+            input(name="searchString" type="text")
+            button(type="submit") Submit
+
+        div(id="tags" data-bind="foreach: tags")
+            div(class="tag")
+                span(data-bind="text: name")
+                input(
+                    type="checkbox"
+                    data-bind=`
+                        checked: isSelected,
+                        attr: {
+                            'data-id': id,
+                            'data-name': name,
+                            'data-is-init-selected': isInitSelected
+                        }`)
+                span(data-bind="text: isSelected")
+
+        div(id="results" data-bind="foreach: currResults")
+            div(class="result")
+                span(class="title" data-bind="text: title")
+                span(class="url" data-bind="text: url")
+                span(class="summary" data-bind="text: summary")
+
+        script(src="knockout.js")
+        script(src="viewmodels.js")
+        //script(src="http.js")

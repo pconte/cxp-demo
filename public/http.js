@@ -8,7 +8,7 @@ function httpPost(event) {
     xmlhttp.setRequestHeader("Content-type", "application/json");
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            displaySearches(JSON.parse(this.responseText));
+            displayResults(JSON.parse(this.responseText));
         }
     };
     xmlhttp.send(JSON.stringify({
@@ -16,6 +16,7 @@ function httpPost(event) {
     }));
 }
 
-function displaySearches(searches) {
-    document.getElementById('searchesList').innerHTML = searches;
+function displayResults(resultObj) {
+    document.getElementById('searchesList').innerHTML = resultObj.searches;
+    
 }

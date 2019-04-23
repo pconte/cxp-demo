@@ -1,11 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 var db = require("./db.js");
 var articles = require("./articles.js");
 
 var app = express();
-app.use(express.static('public'));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 app.use(bodyParser());
+//app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 var searches = [];
 
@@ -14,7 +20,7 @@ app.listen(3000, () => {
 });
 
 app.get("/", (req, res, next) => {
-  res.render("index.html");
+  res.render("index");
 });
 
 app.post("/api/search", (req, res, next) => {
@@ -25,6 +31,6 @@ app.post("/api/search", (req, res, next) => {
     'searches': searches,
     'searchString': searchString,
     'tags': [],
-    'results': []
+    'results': articles
   });
 });
