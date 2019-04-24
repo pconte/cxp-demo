@@ -82,6 +82,7 @@ function ResultsViewModel() {
         if (searchString && searchString !== '') {
             self.postSearch(body, function (response) {
                 self.serverResults(response.results);
+                self.searchString('');
             });
         }
     }
