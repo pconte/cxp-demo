@@ -32,10 +32,26 @@ app.get("/api/tags", (req, res, next) => {
 
 app.get("/api/suggestions", (req, res, next) => {
   // console.log(req.query);
+  // var searchString = req.query.search;
   // TODO: use the incomplete search string to intelligently derive suggestions
-  // from the previously memoized search strings.
+  // from the previously memoized searches.
+
+  var counts = {};
+  searches.forEach(function (search) {
+    counts[search] = counts[search] ? counts[search] + 1 : 1;
+  });
+
+  var suggestions = searches.filter(function (search, index, self) {
+    return self.indexOf(search) === index;
+  }).map(function (suggestion) {
+    return {
+      'suggestion': suggestion,
+      'count': counts[suggestion]
+    }
+  });
+
   res.json({
-    'suggestions': searches
+    'suggestions': suggestions
   });
 });
 

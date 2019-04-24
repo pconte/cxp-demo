@@ -22,7 +22,11 @@ block header
             //- which will not fire the keyup event.
             //- However, there appears to be an issue with the change event not firing.
         ul(id="suggestions" data-bind="foreach: suggestions")
-            li(data-bind="text: $data")
+            li
+                span(data-bind="text: suggestion")
+                | (
+                span(data-bind="text: count")
+                | )
         button(type="submit") Submit
 
 
