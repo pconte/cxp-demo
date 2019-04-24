@@ -9,11 +9,11 @@ by associated tags.
 - vanilla CSS on the client (no frameworks or tooling)
 
 ## Up and Running
-> git clone https://github.com/pconte/cxp-demo.git
-> cd cxp-demo
-> npm install
-> node index.js
-  Visit http://localhost:3000 in your browser.
+- > git clone https://github.com/pconte/cxp-demo.git
+- > cd cxp-demo
+- > npm install
+- > node index.js
+- Visit http://localhost:3000 in your browser.
 
 ## Features
 - Search suggestions provided by the server as the user types a search string.
