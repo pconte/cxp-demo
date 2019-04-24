@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress open",
     "start": "tsc --build tsconfig.json && node index.js"
   },
   "author": "",
@@ -15,6 +15,7 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
+    "cypress": "^3.2.0",
     "typescript": "^3.4.5"
   }
 }
