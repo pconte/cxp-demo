@@ -71,7 +71,7 @@ function ResultsViewModel() {
     }
 
     self.submitSearch = function () {
-        var formData = new FormData(document.getElementById('searchForm'));
+        var formData = new FormData(document.getElementById('search-form'));
         var searchString = formData.get('searchString');
         var body = JSON.stringify({
             'searchString': searchString
@@ -89,7 +89,6 @@ function ResultsViewModel() {
     self.suggestSearchString = function () {
         if (self.searchString() && self.searchString() !== '') {
             self.getSearchSuggestions(self.searchString(), function (response) {
-                console.log(response.suggestions);
                 self.suggestions(response.suggestions);
             });
         }

@@ -1,40 +1,41 @@
 extends layout.pug
 
 block header
-
-    form(
+    h1 Knowledge Base UI
+    br
+    h3 Search
+    form#search-form(
         name="searchForm"
-        id="searchForm"
         data-bind="submit: submitSearch"
         autocomplete="off"
     )
-        input(
-            name="searchString"
-            type="text"
-            data-bind=`
-                textInput: searchString,
-                event: {
-                    keyup: suggestSearchString()
-                }
-            `)
-            //- Above: change event would be better than keyup event
-            //- because user may paste text or select text and right-click delete
-            //- which will not fire the keyup event.
-            //- However, there appears to be an issue with the change event not firing.
-        ul(id="suggestions" data-bind="foreach: suggestions")
-            li
-                span(data-bind="text: suggestion")
-                | (
-                span(data-bind="text: count")
-                | )
-        button(type="submit") Submit
+        div(style="display: inline-block;")
+            input(
+                name="searchString"
+                type="text"
+                data-bind=`
+                    textInput: searchString,
+                    event: {
+                        keyup: suggestSearchString()
+                    }
+                `)
+                //- Above: change event would be better than keyup event
+                //- because user may paste text or select text and right-click delete
+                //- which will not fire the keyup event.
+                //- However, there appears to be an issue with the change event not firing.
+            ul#suggestions(data-bind="foreach: suggestions")
+                li
+                    span(data-bind="text: suggestion")
+                    | (
+                    span(data-bind="text: count")
+                    | )
+        div(style="display: inline-block; vertical-align: top;")
+            button(type="submit") Submit
 
-
-block left-column
-
-    div(id="tags" data-bind="foreach: tags")
-        div(class="tag")
-            span(data-bind="text: name")
+block sidebar
+    h3 Tags
+    div#tags(data-bind="foreach: tags")
+        div.tag
             input(
                 type="checkbox"
                 data-bind=`
@@ -45,13 +46,14 @@ block left-column
                         'data-is-init-selected': isInitSelected
                     }
                 `)
+            span.name(data-bind="text: name")
 
-block right-column
-
-    div(id="results" data-bind="foreach: currResults")
-        div(class="result")
-            span(class="title" data-bind="text: title")
-            span(class="url" data-bind="text: url")
-            span(class="summary" data-bind="text: summary")
+block main
+    h3 Results
+    div#results(data-bind="foreach: currResults")
+        div.result
+            span.title(data-bind="text: title")
+            span.url(data-bind="text: url")
+            span.summary(data-bind="text: summary")
 
     script(src="viewmodels.js")
