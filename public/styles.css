@@ -10,19 +10,21 @@ h1, h2, h3 {
 
 #container {
     display: grid;
-    grid-template-columns: 150px 150px 150px 150px;
+    grid-template-columns: 200px 200px 1fr 150px;
     grid-template-rows: auto;
     grid-template-areas: 
       "header header header header"
-      "tags results results results";
+      ". tags results results";
     border: solid 1px #000000;
     margin: 20px;
-    width: 600px;
+    width: 95%;
+    justify-content: stretch;
 }
 
 header {
     grid-area: header;
     background: #eeeeee;
+    height: 70px;
 }
 .sidebar {
     grid-area: tags;
