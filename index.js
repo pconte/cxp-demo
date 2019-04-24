@@ -2,8 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var db = require("./db.js");
-var articles = require("./models/articles.js");
-var tags = require("./models/tags.js");
+var articles = require("./data/articles.js");
+var tags = require("./data/tags.js");
 
 var app = express();
 
