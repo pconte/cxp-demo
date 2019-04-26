@@ -88,6 +88,7 @@ function ResultsViewModel() {
     }
 
     self.suggestSearchString = function () {
+        console.log('suggest');
         if (self.searchString() && self.searchString() !== '') {
             self.getSearchSuggestions(self.searchString(), function (response) {
                 self.suggestions(response.suggestions);

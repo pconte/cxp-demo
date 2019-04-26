@@ -1,0 +1,41 @@
+extends layout.pug
+
+block header
+    h3.search-header Search
+    form#search-form(
+        name="searchForm"
+        v-on:submit="submitSearch(event)"
+        autocomplete="off"
+    )
+        div(style="display: inline-block;")
+            input(
+                name="searchString"
+                type="text"
+                v-model="searchString"
+                v-on:keyup="suggestSearchString(event)"
+            )
+            ul#suggestions
+                suggestion(
+                    v-for="suggestion in suggestions"
+                    v-bind:suggestion="suggestion"
+                )
+        div(style="display: inline-block; vertical-align: top;")
+            button(type="submit") Submit
+
+block sidebar
+    h3 Tags
+    div#tags
+        tag(
+            v-for="tag in tags"
+            v-bind:tag="tag"
+            v-bind:key="tag.id"
+        )
+
+block main
+    h3 Results
+    div#results
+        result(
+            v-for="result in clientResults"
+            v-bind:result="result"
+            v-bind:key="result.id"
+        )
