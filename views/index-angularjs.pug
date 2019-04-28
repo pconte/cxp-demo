@@ -18,12 +18,10 @@ block header
                     name="searchString"
                     type="text"
                     ng-model="searchString"
+                    ng-keyup="suggestSearchString()"
                 )
                 ul#suggestions
-                    suggestion(
-                        v-for="suggestion in suggestions"
-                        v-bind:suggestion="suggestion"
-                    )
+                    li(ng-repeat="suggestion in suggestions") {{ suggestion.suggestion }} ({{ suggestion.count }})
             div(style="display: inline-block; vertical-align: top;")
                 button(
                     type="submit"

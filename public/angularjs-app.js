@@ -21,22 +21,42 @@ searchModule.service('SearchService', function ($http) {
             return response.data.results;
         });
     };
+    this.getSearchStringSuggestions = function (searchString, callback) {
+        return $http.get('/api/suggestions?search='+searchString).then(function (response) {
+            return response.data.suggestions;
+        });
+    };
 });
 searchModule.controller('SearchController', function ($rootScope, $scope, SearchService, ResultsService) {
     $scope.searchString = '';
-
+    $scope.suggestions = [];
     $scope.submitSearch = function () {
+        var searchString = $scope.searchString;
         var body = JSON.stringify({
-            'searchString': $scope.searchString
+            'searchString': searchString
             // additional options can go here
             // also can capture the user session and environment for analytics
         });
 
-        if ($scope.searchString !== '') {
+        if (searchString !== '') {
             SearchService.postSearch(body).then(function (results) {
                 $rootScope.results = results;
                 $rootScope.clientResults = ResultsService.filterResults();
+                $scope.searchString = '';
+                $scope.suggestions = [];
             });
+        }
+    };
+    $scope.suggestSearchString = function () {
+        var searchString = $scope.searchString;
+
+        if (searchString !== '') {
+            SearchService.getSearchStringSuggestions(searchString).then(function (suggestions) {
+                $scope.suggestions = suggestions;
+            });
+        }
+        else {
+            $scope.suggestions = [];
         }
     };
 });
@@ -59,9 +79,11 @@ tagsModule.service('TagsService', function ($http, $rootScope) {
     };
 });
 tagsModule.controller('TagsController', function ($rootScope, $scope, TagsService, ResultsService) {
-    TagsService.getTags().then(function (tags) {
-        $rootScope.tags = tags;
-    });
+    (function init () {
+        TagsService.getTags().then(function (tags) {
+            $rootScope.tags = tags;
+        });
+    })();
 
     $scope.toggleTag = function () {
         $rootScope.selectedTagIds = TagsService.getSelectedTags();
