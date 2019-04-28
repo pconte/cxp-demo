@@ -1,0 +1,49 @@
+extends layout.pug
+
+block append headscripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js")
+
+block append bodyscripts
+    script(src="angularjs-app.js")
+
+block header
+    h3.search-header Search
+    div(ng-module="Search" ng-controller="SearchController")
+        form#search-form(
+            name="searchForm"
+            autocomplete="off"
+        )
+            div(style="display: inline-block;")
+                input(
+                    name="searchString"
+                    type="text"
+                    ng-model="searchString"
+                )
+                ul#suggestions
+                    suggestion(
+                        v-for="suggestion in suggestions"
+                        v-bind:suggestion="suggestion"
+                    )
+            div(style="display: inline-block; vertical-align: top;")
+                button(
+                    type="submit"
+                    ng-click="submitSearch()") Submit
+
+block sidebar
+    h3 Tags
+    div#tags(ng-module="Tags" ng-controller="TagsController")
+        div(ng-repeat="tag in tags")
+            input(
+                type="checkbox"
+                ng-model="tag.isSelected"
+                ng-change="toggleTag()"
+            )
+            span.name {{ tag.name }}
+
+block main
+    h3 Results
+    div#results(ng-module="Results" ng-controller="ResultsController")
+        div(ng-repeat="result in clientResults")
+            .title {{ result.title }}
+            .url {{ result.url }}
+            .summary {{ result.summary }}

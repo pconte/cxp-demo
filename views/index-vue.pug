@@ -1,5 +1,11 @@
 extends layout.pug
 
+block append headscripts
+    script(src="https://cdn.jsdelivr.net/npm/vue")
+
+block append bodyscripts
+    script(src="components.js")
+
 block header
     h3.search-header Search
     form#search-form(

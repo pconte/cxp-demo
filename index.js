@@ -14,11 +14,11 @@ app.use(bodyParser());
 //app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var searches = [];
-
 app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
+
+
 
 app.get("/", (req, res, next) => {
   res.render("index");
@@ -26,6 +26,13 @@ app.get("/", (req, res, next) => {
 app.get("/index-vue", (req, res, next) => {
   res.render("index-vue");
 });
+app.get("/index-angularjs", (req, res, next) => {
+  res.render("index-angularjs");
+});
+
+
+
+var searches = [];
 
 app.get("/api/tags", (req, res, next) => {
   res.json({

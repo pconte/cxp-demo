@@ -1,18 +1,16 @@
 doctype html
 html
     head
-        script(src="knockout.js")
-        script(src="https://cdn.jsdelivr.net/npm/vue")
-        link(rel="stylesheet" href="styles.css" type="text/css")
+        block headscripts
+        link(rel="stylesheet" href="/styles.css" type="text/css")
         title Knowledge Base UI
     body
         h1 Knowledge Base UI
-        #container
+        #container(ng-app="App" ng-controller="AppController")
             header
                 block header
             .sidebar
                 block sidebar
             main
                 block main
-        script(src="viewmodels.js")
-        script(src="components.js")
+        block bodyscripts

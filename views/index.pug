@@ -1,5 +1,11 @@
 extends layout.pug
 
+block append headscripts
+    script(src="knockout.js")
+
+block append bodyscripts
+    script(src="viewmodels.js")
+
 block header
     h3 Search
     form#search-form(
