@@ -1,61 +1,22 @@
-extends layout.pug
+h1 Knowledge Base UI demo
+p
+    | This demo allows the user to search a list of articles and filter the results by related tags.
+    | The server also returns search string suggestions onkeyup. These suggestions are mocks, as the
+    | server performs no actual analysis and just returns the search strings that have been stored during
+    | the current server instance.
+p
+    | The server runs on node/express. The UI is written in three different frameworks. Pug is used for
+    | templating.
+p
+    | I decided to showcase the bare bones process of creating a server, establishing basic data models
+    | and user interactions, iterating on a prototype, and refining into a deliverable. I also am demonstrating
+    | framework versatility/agnosticism.
 
-block append headscripts
-    script(src="knockout.js")
-
-block append bodyscripts
-    script(src="viewmodels.js")
-
-block header
-    h3 Search
-    form#search-form(
-        name="searchForm"
-        data-bind="submit: submitSearch"
-        autocomplete="off"
-    )
-        div(style="display: inline-block;")
-            input(
-                name="searchString"
-                type="text"
-                data-bind=`
-                    textInput: searchString,
-                    event: {
-                        keyup: suggestSearchString()
-                    }
-                `)
-                //- Above: change event would be better than keyup event
-                //- because user may paste text or select text and right-click delete
-                //- which will not fire the keyup event.
-                //- However, there appears to be an issue with the change event not firing.
-            ul#suggestions(data-bind="foreach: suggestions")
-                li
-                    span(data-bind="text: suggestion")
-                    | (
-                    span(data-bind="text: count")
-                    | )
-        div(style="display: inline-block; vertical-align: top;")
-            button(type="submit") Submit
-
-block sidebar
-    h3 Tags
-    div#tags(data-bind="foreach: tags")
-        div.tag
-            input(
-                type="checkbox"
-                data-bind=`
-                    checked: isSelected,
-                    attr: {
-                        'data-id': id,
-                        'data-name': name,
-                        'data-is-init-selected': isInitSelected
-                    }
-                `)
-            span.name(data-bind="text: name")
-
-block main
-    h3 Results
-    div#results(data-bind="foreach: currResults")
-        div.result
-            span.title(data-bind="text: title")
-            span.url(data-bind="text: url")
-            span.summary(data-bind="text: summary")
+h3 Versions of the demo site:
+ul
+    li
+        a(href="knockout") Knockout
+    li
+        a(href="vue") Vue
+    li
+        a(href="angularjs") AngularJS

@@ -44,7 +44,7 @@ Vue.component('tag', {
 Vue.component('result', {
     props: ['result'],
     template: `
-        <div>
+        <div class="result">
             <span class="title">{{ result.title }}</span>
             <span class="url">{{ result.url }}</span>
             <span class="summary">{{ result.summary }}</span>

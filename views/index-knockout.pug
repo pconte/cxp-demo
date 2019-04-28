@@ -1,0 +1,60 @@
+extends layout.pug
+
+block variables
+    - var subtitle = 'knockout'
+
+block append headscripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js")
+
+block append bodyscripts
+    script(src="knockout-app.js")
+
+block header
+    h3 Search
+    form#search-form(
+        name="searchForm"
+        data-bind="submit: submitSearch"
+        autocomplete="off"
+    )
+        div(style="display: inline-block;")
+            input(
+                name="searchString"
+                type="text"
+                data-bind=`
+                    textInput: searchString,
+                    event: {
+                        keyup: suggestSearchString()
+                    }
+                `)
+            ul#suggestions(data-bind="foreach: suggestions")
+                li
+                    span(data-bind="text: suggestion")
+                    | (
+                    span(data-bind="text: count")
+                    | )
+        div(style="display: inline-block; vertical-align: top;")
+            button(type="submit") Submit
+
+block sidebar
+    h3 Tags
+    div#tags(data-bind="foreach: tags")
+        div.tag
+            input(
+                type="checkbox"
+                data-bind=`
+                    checked: isSelected,
+                    attr: {
+                        'data-id': id,
+                        'data-name': name,
+                        'data-is-init-selected': isInitSelected
+                    }
+                `)
+            span.name(data-bind="text: name")
+
+block main
+    h3 Results
+    div#results(data-bind="foreach: currResults")
+        div.result
+            span.title(data-bind="text: title")
+            span.url(data-bind="text: url")
+            span.summary(data-bind="text: summary")

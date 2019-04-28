@@ -23,10 +23,13 @@ app.listen(3000, () => {
 app.get("/", (req, res, next) => {
   res.render("index");
 });
-app.get("/index-vue", (req, res, next) => {
+app.get("/knockout", (req, res, next) => {
+  res.render("index-knockout");
+});
+app.get("/vue", (req, res, next) => {
   res.render("index-vue");
 });
-app.get("/index-angularjs", (req, res, next) => {
+app.get("/angularjs", (req, res, next) => {
   res.render("index-angularjs");
 });
 

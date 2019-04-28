@@ -1,5 +1,8 @@
 extends layout.pug
 
+block variables
+    - var subtitle = 'angularjs'
+
 block append headscripts
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js")
 
@@ -41,7 +44,7 @@ block sidebar
 block main
     h3 Results
     div#results(ng-module="Results" ng-controller="ResultsController")
-        div(ng-repeat="result in clientResults")
+        div(class="result" ng-repeat="result in clientResults")
             .title {{ result.title }}
             .url {{ result.url }}
             .summary {{ result.summary }}
