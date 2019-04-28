@@ -10,8 +10,10 @@ by associated tags. The server also returns search string suggestions onkeyup.
 - vanilla CSS on the client
 
 ## Up and Running
-- %> git clone https://github.com/pconte/cxp-demo.git
-- %> cd cxp-demo
-- %> npm install
-- %> node index.js
+```console
+%> git clone https://github.com/pconte/cxp-demo.git
+%> cd cxp-demo
+%> npm install
+%> node index.js
+```
 - Visit http://localhost:3000 in your browser.
