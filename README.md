@@ -6,8 +6,8 @@ by associated tags. The server also returns search string suggestions onkeyup.
 - node/express server for server-side templates and API endpoints
 - knockout, vue, and angularjs for UI framework(s)
 - pug for client-side templates
-- vanilla JavaScript on the client
-- vanilla CSS on the client
+- vanilla JavaScript
+- vanilla CSS + CSS Grid
 
 ## Up and Running
 ```console

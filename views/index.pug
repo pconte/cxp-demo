@@ -1,22 +1,28 @@
-h1 Knowledge Base UI demo
-p
-    | This demo allows the user to search a list of articles and filter the results by related tags.
-    | The server also returns search string suggestions onkeyup. These suggestions are mocks, as the
-    | server performs no actual analysis and just returns the search strings that have been stored during
-    | the current server instance.
-p
-    | The server runs on node/express. The UI is written in three different frameworks. Pug is used for
-    | templating.
-p
-    | I decided to showcase the bare bones process of creating a server, establishing basic data models
-    | and user interactions, iterating on a prototype, and refining into a deliverable. I also am demonstrating
-    | framework versatility/agnosticism.
+doctype html
+html
+    head
+        link(rel="stylesheet" href="/styles.css" type="text/css")
+    body
+        h1 Knowledge Base UI demo
+        p
+            | This demo allows the user to search a list of articles and filter the results by related tags.
+            | The server also returns search string suggestions onkeyup. These suggestions are mocks, as the
+            | server performs no actual analysis and just returns the search strings that have been stored during
+            | the current server instance. The search results are also mocks as all article are returned no matter
+            | the search string.
+        p
+            | The server runs on node/express. The UI is written in three different frameworks. Pug is used for
+            | templating.
+        p
+            | I decided to demonstrate the bare bones process of creating a server/client app, establishing basic data models
+            | and user interactions, iterating on a prototype, and refining into a product. I also am demonstrating
+            | framework versatility/agnosticism.
 
-h3 Versions of the demo site:
-ul
-    li
-        a(href="knockout") Knockout
-    li
-        a(href="vue") Vue
-    li
-        a(href="angularjs") AngularJS
+        h3 Versions of the demo site:
+        ul
+            li
+                a(href="knockout") Knockout
+            li
+                a(href="vue") Vue
+            li
+                a(href="angularjs") AngularJS
