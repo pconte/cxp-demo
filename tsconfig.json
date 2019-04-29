@@ -1,1 +1,19 @@
-{}
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./public",
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "lib": ["es2016"]
+  },
+  "files": [
+    "./public/knockout-app.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
